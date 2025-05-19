@@ -5,8 +5,7 @@ const FILES_TO_CACHE = [
   '/Sprint-C3-Lab-1/styles.css',
   '/Sprint-C3-Lab-1/script.js',
   '/Sprint-C3-Lab-1/manifest.json',
-  '/Sprint-C3-Lab-1/icon-192x192.png',
-  '/Sprint-C3-Lab-1/favicon.ico'
+  '/Sprint-C3-Lab-1/icon-192x192.png'
 ];
 
 self.addEventListener('install', (event) => {
