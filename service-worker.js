@@ -13,8 +13,19 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Caching files');
-      return cache.addAll(FILES_TO_CACHE);
-    }).catch((err) => {
+return Promise.all(
+  FILES_TO_CACHE.map((file) =>
+    fetch(file)
+      .then((response) => {
+        if (!response.ok){ throw new Error(`Fetch failed: ${file}`);}
+        return cache.put(file, response.clone());
+        
+      })
+      .catch((err) => {
+        console.warn(`[SW] Skipped ${file}: ${err.message}`);
+      })
+  )
+);    }).catch((err) => {
       console.error('[Service Worker] Failed to cache:', err);
     })
   );
